@@ -9,4 +9,5 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const LOGOUT = "LOGOUT";
 //-----------------------------profile------------------------------------------
 export const GET_PROFILE = "GET_PROFILE";
+export const CREATE_PROFILE = "CREATE_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";

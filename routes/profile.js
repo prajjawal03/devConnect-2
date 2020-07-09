@@ -23,9 +23,10 @@ router.get("/me", auth, async (req, res) => {
 //@desc    create profile
 //@access  private
 router.post("/", auth, async (req, res) => {
-  const { skills, bio } = req.body;
+  const { skills, bio, status } = req.body;
   //creating profileFields
   const profileFields = {};
+  if (status) profileFields.status = status;
   if (bio) profileFields.bio = bio;
   if (skills)
     profileFields.skills = skills.split(",").map((skill) => skill.trim());

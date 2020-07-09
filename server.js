@@ -5,8 +5,7 @@ const app = express();
 //bodyparser middleware
 app.use(express.json());
 //connecting to db
-const db =
-  "mongodb+srv://prajjawal:prajjawal0311@cluster0-lvzri.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const db = "";
 
 const connect = async () => {
   try {

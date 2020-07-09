@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
+import DashboardAction from "./DashboardAction";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getProfile } from "../../actions/profile";
+import Spinner from "../layout/Spinner";
 const Dashboard = ({ getProfile, profile, loading, user }) => {
   useEffect(() => {
     getProfile();
   }, [getProfile]);
   return loading && profile === null ? (
-    <>spinner</>
+    <Spinner />
   ) : (
     <>
       {" "}
@@ -19,12 +21,12 @@ const Dashboard = ({ getProfile, profile, loading, user }) => {
         <>
           {" "}
           <p>You have not yet setup a profile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-primary my-1">
+          <Link to="/createprofile" className="btn btn-primary my-1">
             Create Profile
           </Link>
         </>
       ) : (
-        <>has</>
+        <DashboardAction />
       )}
     </>
   );
