@@ -6,6 +6,9 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   const userBar = (
     <ul>
       <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
         <Link onClick={logout} to="/">
           logout
         </Link>

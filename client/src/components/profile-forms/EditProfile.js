@@ -19,7 +19,7 @@ const EditProfile = ({
     getProfile();
     setFormData({
       status: loading || !profile.status ? "" : profile.status,
-      skills: loading || !profile.skills ? "" : profile.skills,
+      skills: loading || !profile.skills ? "" : profile.skills.join(","),
       bio: loading || !profile.bio ? "" : profile.bio,
     });
   }, [loading]);

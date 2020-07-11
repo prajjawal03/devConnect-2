@@ -85,7 +85,7 @@ router.delete("/", auth, async (req, res) => {
     await Profile.findOneAndRemove({ user: req.user.id });
     //delete user
     await User.findOneAndRemove({ _id: req.user.id });
-    res.json({ msg: `profile deleted of id: ${req.user.id}` });
+    res.json("account deleted");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("internal Server Error");
