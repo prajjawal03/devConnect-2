@@ -74,16 +74,18 @@ export const createProfile = (formData, history, edit = false) => async (
   }
 };
 export const deleteAccount = () => async (dispatch) => {
-  try {
-    const res = await axios.get("/profile/");
-    dispatch({
-      type: CLEAR_PROFILE,
-    });
-    dispatch({ type: DELETE_ACCOUNT, payload: res.data });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: err.response.data.msg,
-    });
+  if (window.confirm("are you sure? it cannot be undone! ")) {
+    try {
+      const res = await axios.delete("/profile/");
+      dispatch({
+        type: CLEAR_PROFILE,
+      });
+      dispatch({ type: DELETE_ACCOUNT, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: err.response.data.msg,
+      });
+    }
   }
 };

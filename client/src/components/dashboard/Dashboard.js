@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import DashboardAction from "./DashboardAction";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getProfile } from "../../actions/profile";
+import { getProfile, deleteAccount } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
-const Dashboard = ({ getProfile, profile, loading, user }) => {
+const Dashboard = ({ getProfile, profile, loading, user, deleteAccount }) => {
   useEffect(() => {
     getProfile();
   }, [getProfile]);
@@ -26,7 +26,14 @@ const Dashboard = ({ getProfile, profile, loading, user }) => {
           </Link>
         </>
       ) : (
-        <DashboardAction />
+        <>
+          <DashboardAction />
+          <div className="my-2">
+            <button className="btn btn-danger" onClick={() => deleteAccount()}>
+              <i className="fas fa-user-minus" /> Delete My Account
+            </button>
+          </div>
+        </>
       )}
     </>
   );
@@ -36,4 +43,6 @@ const mapStateToProps = (state) => ({
   loading: state.profile.loading,
   user: state.auth.user,
 });
-export default connect(mapStateToProps, { getProfile })(Dashboard);
+export default connect(mapStateToProps, { getProfile, deleteAccount })(
+  Dashboard
+);
