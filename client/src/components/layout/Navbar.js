@@ -6,6 +6,9 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
   const userBar = (
     <ul>
       <li>
+        <Link to="/posts">posts</Link>
+      </li>
+      <li>
         <Link to="/profiles">Developers</Link>
       </li>
       <li>
@@ -18,6 +21,9 @@ const Navbar = ({ logout, isAuthenticated, loading }) => {
 
   const guestBar = (
     <ul>
+      <li>
+        <Link to="/posts">posts</Link>
+      </li>
       <li>
         <Link to="/profiles">Developers</Link>
       </li>

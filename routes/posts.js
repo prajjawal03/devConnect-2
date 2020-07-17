@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Profile = require("../models/Profile");
 const Post = require("../models/Post");
 
-//@route  post /post
+//@route  post /posts
 //@desc   create post
 //@access private
 router.post("/", auth, async (req, res) => {
@@ -28,7 +28,7 @@ router.post("/", auth, async (req, res) => {
 //@access public
 router.get("/", async (req, res) => {
   try {
-    const post = await Post.find();
+    const post = await Post.find().sort({ date: -1 });
     if (!post) return res.status(404).json({ msg: "no post found" });
     res.json(post);
   } catch (err) {
