@@ -53,6 +53,55 @@ router.get("/post/:post_id", async (req, res) => {
   }
 });
 
+//@route  post /posts/post/comment
+//@desc   post comment on post
+//@access priavte
+router.post("/comment/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    const post = await Post.findById(req.params.id);
+    const comment = {
+      text: req.body.text,
+      name: user.name,
+      user: req.user.id,
+    };
+    post.comments.push(comment);
+    await post.save();
+    res.json(post.comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: "internal server error" });
+  }
+});
+
+//@route  delete /posts/comment/:post_id/:comment_id
+//@desc   delete comment by id
+//@access priavte
+router.delete("/comment/:post_id/:comment_id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.post_id);
+    console.log(post);
+    //pull out comments
+    const comment = post.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    if (!comment) return res.status(404).json({ msg: "not found" });
+    // Check user
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+    //remove comment
+    post.comments = post.comments.filter(
+      ({ id }) => id !== req.params.comment_id
+    );
+    await post.save();
+    res.json(post.comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: "internal server error" });
+  }
+});
+
 //@route  delete /posts/:post_id
 //@desc   delete post by id
 //@access priavte
